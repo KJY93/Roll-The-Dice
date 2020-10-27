@@ -1,0 +1,12 @@
+{{!-- Loop through the array and display the image --}}
+<div id="random-dice-image">  
+    {{#each imgArray}}
+        <div>  
+            <img src={{ this }} alt="A dice image" />
+        </div>
+    {{/each}}
+</div>
+
+<div id="return-link">
+    Click <a href="/"><strong>HERE</strong></a> to go back to the main page!
+</div>

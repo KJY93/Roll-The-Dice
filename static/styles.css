@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+h4 {
+    margin-top: 50px;
+}
+
+img {
+    height: 300px;
+}
+
+strong {
+    color:#6BCAE2;
+}
+
+a {
+    text-decoration: none;
+}
+
+#layout-bg {
+    background-color: #000;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#return-link {
+    color: #fff
+}
+
+#random-dice-image {
+    display: flex;
+}
+
+.header-metadata {
+    color: #fff;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
