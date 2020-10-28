@@ -13,7 +13,7 @@ app.use(
     express.static(__dirname + '/static')
 )
 
-// Random number generators
+// Constants to use for the random dice image generators
 const MIN = 1
 const MAX = 6
 const IMG_PREFIX = 'dice'
