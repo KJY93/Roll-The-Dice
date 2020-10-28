@@ -8,6 +8,11 @@ const PORT = process.argv[2] ? parseInt(process.argv[2]) : 3000
 // Create an instance of the express application
 const app = express()
 
+// Load static files
+app.use(
+    express.static(__dirname + '/static')
+)
+
 // Random number generators
 const MIN = 1
 const MAX = 6
@@ -38,8 +43,8 @@ app.set('view engine', 'hbs')
 
 // The index page
 // Using the GET / method
-app.get('/', (req, res) => {
-    console.info(res.status)
+// Can use array to pass in multiple resource
+app.get(['/', '/index.html'], (req, res) => {
     res.status(200)
     res.type('text/html')
     res.render('dice')
@@ -55,10 +60,25 @@ app.get('/random', (req, res) => {
     })
 })
 
-// Configure application
-app.use(
-    express.static(__dirname + '/static')
-)
+// Handling errors
+app.get('*', function(req, res, next) {
+    let err = new Error(`${req.ip} tried to reach ${req.originalUrl}`); // Tells us which IP tried to reach a particular URL
+    err.statusCode = 404;
+    err.shouldRedirect = true; //New property on err so that our middleware will redirect
+    next(err);
+  });
+  
+
+app.use(function(err, req, res, next) {
+    console.error(err.message);
+    if (!err.statusCode) err.statusCode = 500; // Sets a generic server error status code if none is part of the err
+
+    if (err.shouldRedirect) {
+        res.redirect('/') // Redirect user back to main page
+    } else {
+        res.status(err.statusCode).send(err.message); // If shouldRedirect is not defined in our error, sends our original err data
+    }
+});
 
 // Start express
 app.listen(
